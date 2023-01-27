@@ -14,6 +14,7 @@ from tensorboardX import SummaryWriter
 import dataset as dataset
 from net import CTDNet
 from apex import amp
+from mail import sentEmain
 
 
 def total_loss(pred, mask):
@@ -124,6 +125,7 @@ def train(Dataset, Network):
                 min_mae = mae
                 best_epoch = epoch + 1
                 torch.save(net.state_dict(), cfg.savepath + '/model-' + str(epoch + 1))
+                sentEmain("CTDNet训练：保存模型","CTDNet已经模型保存，BEST Epoch,第{}Epoch".format(epoch+1))
             print('best epoch is:%d, MAE:%s' % (best_epoch, min_mae))
             if epoch == 38 or epoch == 39:
                 torch.save(net.state_dict(), cfg.savepath + '/model-' + str(epoch + 1))

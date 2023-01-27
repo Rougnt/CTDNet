@@ -3,9 +3,9 @@ import os.path as osp
 import cv2
 import numpy as np
 
-path="data/DUTS/mask"
+path="data/Crack500/mask"
 image_files=os.listdir(path)
-save_path = "data/DUTS/edge"
+save_path = "data/Crack500/edge"
 
 for i in range(len(image_files)):
     image = image_files[i]
