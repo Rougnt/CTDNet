@@ -97,7 +97,7 @@ class Data(Dataset):
         shape = mask.shape
 
         if self.cfg.mode == 'train':
-            edge = cv2.imread(self.cfg.datapath + '/edge/' + name + '_edge.png', 0).astype(np.float32)
+            edge = cv2.imread(self.cfg.datapath + '/edge/' + name + '.png', 0).astype(np.float32)
             image, mask, edge = self.normalize(image, mask, edge)
             image, mask, edge = self.randomcrop(image, mask, edge)
             image, mask, edge = self.randomflip(image, mask, edge)

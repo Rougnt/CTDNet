@@ -4,7 +4,6 @@ import sys
 import datetime
 import random
 import numpy as np
-sys.path.insert(0, '../')
 sys.dont_write_bytecode = True
 
 import torch
@@ -62,11 +61,11 @@ def train(Dataset, Network):
     random.seed(seed)
 
     ## dataset
-    cfg = Dataset.Config(datapath='../data/DUTS', savepath='./out', mode='train', batch=32, lr=0.05, momen=0.9, decay=5e-4, epoch=40)
+    cfg = Dataset.Config(datapath='./data/DUTS', savepath='./out', mode='train', batch=16, lr=0.05, momen=0.9, decay=5e-4, epoch=40)
     data = Dataset.Data(cfg)
     loader = DataLoader(data, collate_fn=data.collate, batch_size=cfg.batch, shuffle=True, num_workers=8)
     ## val dataloader
-    val_cfg = Dataset.Config(datapath='../data/ECSSD', mode='test')
+    val_cfg = Dataset.Config(datapath='./data/ECSSD', mode='test')
     val_data = Dataset.Data(val_cfg)
     val_loader = DataLoader(val_data, batch_size=1, shuffle=False, num_workers=8)
     min_mae = 1.0
