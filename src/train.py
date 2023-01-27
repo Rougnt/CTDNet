@@ -62,7 +62,7 @@ def train(Dataset, Network):
     random.seed(seed)
 
     ## dataset
-    cfg = Dataset.Config(datapath='./data/DUTS', savepath='./out', mode='train', batch=16, lr=0.05, momen=0.9, decay=5e-4, epoch=40)
+    cfg = Dataset.Config(datapath='./data/DUTS', savepath='./out', mode='train', batch=32, lr=0.05, momen=0.9, decay=5e-4, epoch=40)
     data = Dataset.Data(cfg)
     loader = DataLoader(data, collate_fn=data.collate, batch_size=cfg.batch, shuffle=True, num_workers=8)
     ## val dataloader
@@ -128,6 +128,7 @@ def train(Dataset, Network):
                 sentEmain("CTDNet训练：保存模型","CTDNet已经模型保存，BEST Epoch,第{}Epoch".format(epoch+1))
             print('best epoch is:%d, MAE:%s' % (best_epoch, min_mae))
             if epoch == 38 or epoch == 39:
+                sentEmain("CTDNet训练：保存模型","CTDNet已经模型保存，训练结束")
                 torch.save(net.state_dict(), cfg.savepath + '/model-' + str(epoch + 1))
 
 

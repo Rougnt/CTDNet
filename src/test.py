@@ -21,7 +21,7 @@ from net import CTDNet
 class Test(object):
     def __init__(self, Dataset, Network, path):
         ## dataset
-        self.cfg = Dataset.Config(datapath=path, snapshot='./out/CTDNet-50', mode='test')
+        self.cfg = Dataset.Config(datapath=path, snapshot='./out/Crackmodel-40', mode='test')
         self.data = Dataset.Data(self.cfg)
         self.loader = DataLoader(self.data, batch_size=1, shuffle=False, num_workers=8)
         ## network
@@ -42,8 +42,8 @@ class Test(object):
                 pred = (torch.sigmoid(out[0, 0]) * 255).cpu().numpy()
                 edge = (torch.sigmoid(out_edge[0, 0]) * 255).cpu().numpy()
 
-                save_path = '../eval/maps/CTDNet/' + self.cfg.datapath.split('/')[-1]
-                save_edge = '../eval/maps/CTDNet/Edge/' + self.cfg.datapath.split('/')[-1]
+                save_path = './eval/maps/CTDNet/' + self.cfg.datapath.split('/')[-1]
+                save_edge = './eval/maps/CTDNet/Edge/' + self.cfg.datapath.split('/')[-1]
 
                 if not os.path.exists(save_path):
                     os.makedirs(save_path)
@@ -59,6 +59,6 @@ class Test(object):
 
 
 if __name__ == '__main__':
-    for path in ['./data/ECSSD', './data/PASCAL-S', './data/DUTS', './data/DUT-OMRON', './data/SOD']:
+    for path in ['./data/Crack500Deep', './data/Crack500', './data/DeepCrack', './data/GaMM']:
         test = Test(dataset, CTDNet, path)
         test.save()
